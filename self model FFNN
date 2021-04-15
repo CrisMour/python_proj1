@@ -272,3 +272,10 @@ class NeuralNetMLP(object):
             acc_nn=valid_acc
 
         return self, f1_nn, mse_nn, hl_nn, acc_nn
+n_epochs = 10
+nn = NeuralNetMLP(n_hidden=100, l2=0.01, epochs=n_epochs, eta=0.0005, minibatch_size=100, shuffle=True, seed=1)
+
+fit=nn.fit(X_train=X_train[:55000], 
+       y_train=y_train[:55000],
+       X_valid=X_train[55000:],
+       y_valid=y_train[55000:])
