@@ -1,0 +1,108 @@
+from sklearn import datasets
+import numpy as np
+
+# Load the IRIS dataset: iris.data stores the input variables (flower features); iris.target stores the target variables.
+iris = datasets.load_iris()
+
+# Use only the "Sepal" features (Sepal Length & Width)
+X01 = iris.data[:, [0, 1]]
+
+# Use only the "Petal" features (Petal Length & Width)
+X23 = iris.data[:, [2, 3]]
+
+# Use all features (Sepal & Petal Length & Width)
+X = iris.data
+
+# Flower Classes: 0 for Iris-Setosa, 1 for Iris-Versicolor, and 2 for Iris-Virginica
+y = iris.target
+
+
+from sklearn.model_selection import train_test_split
+
+# Training and Test sets based on the "Sepal" features
+X01_train, X01_test, y_train, y_test = train_test_split(X01, y, test_size = 0.3, random_state = 1, stratify = y)
+
+# Training and Test sets based on the "Petal" features
+X23_train, X23_test, y_train, y_test = train_test_split(X23, y, test_size = 0.3, random_state = 1, stratify = y)
+
+# Training and Test sets - all features
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1, stratify = y)
+
+
+from sklearn.svm import SVC
+print("---Linear Results---")
+# svm01: SVM model trained by taking into account only the "Sepal" features
+svm01 = SVC(kernel='linear', C=1.0, random_state=1)
+svm01.fit(X01_train, y_train)
+
+# svm23: SVM model trained by taking into account only the "Petal" features
+svm23 = SVC(kernel='linear', C=1.0, random_state=1)
+svm23.fit(X23_train, y_train)
+
+# svm: SVM model trained by taking into account all features
+svm = SVC(kernel='linear', C=1.0, random_state=1)
+svm.fit(X_train, y_train)
+
+y_pred = svm.predict(X_test)
+
+
+y01_pred = svm01.predict(X01_test)
+
+
+y23_pred = svm23.predict(X23_test)
+
+
+from sklearn.metrics import accuracy_score
+
+print('Accuracy (All Features): %.3f' % accuracy_score(y_test, y_pred))
+
+from sklearn.metrics import f1_score
+
+print('F1 (All Features): %.3f' % f1_score(y_test, y_pred, average='weighted'))
+print("---Hamming---")
+print(metrics.hamming_loss(y_test, y_pred, sample_weight=None))
+print("---MSE---")
+print(metrics.mean_squared_error(y_test, y_pred, sample_weight=None, multioutput='uniform_average', squared=True))
+
+HammingN1C3Linear=metrics.hamming_loss(original_result, preds, sample_weight=None)
+MSEN1C3Linear=metrics.mean_squared_error(original_result, preds, sample_weight=None, multioutput='uniform_average', squared=True)
+F1N1C3Linear=f1_score(original_result, preds, average='weighted')
+AccuracyN1C3Linear=log_regress.score(X = X_test ,y = y_test)
+print("---RBF Results---")
+
+# svm01: SVM model trained by taking into account only the "Sepal" features
+svm01 = SVC(kernel='rbf', C=1.0, random_state=1)
+svm01.fit(X01_train, y_train)
+
+# svm23: SVM model trained by taking into account only the "Petal" features
+svm23 = SVC(kernel='rbf', C=1.0, random_state=1)
+svm23.fit(X23_train, y_train)
+
+# svm: SVM model trained by taking into account all features
+svm = SVC(kernel='rbf', C=1.0, random_state=1)
+svm.fit(X_train, y_train)
+
+y_pred = svm.predict(X_test)
+
+
+y01_pred = svm01.predict(X01_test)
+
+
+y23_pred = svm23.predict(X23_test)
+
+
+from sklearn.metrics import accuracy_score
+
+print('Accuracy (All Features): %.3f' % accuracy_score(y_test, y_pred))
+
+from sklearn.metrics import f1_score
+
+print('F1 (All Features): %.3f' % f1_score(y_test, y_pred, average='weighted'))
+print("---Hamming---")
+print(metrics.hamming_loss(y_test, y_pred, sample_weight=None))
+print("---MSE---")
+print(metrics.mean_squared_error(y_test, y_pred, sample_weight=None, multioutput='uniform_average', squared=True))
+HammingN1C3RBF=metrics.hamming_loss(original_result, preds, sample_weight=None)
+MSEN1C3RBF=metrics.mean_squared_error(original_result, preds, sample_weight=None, multioutput='uniform_average', squared=True)
+F1N1C3RBF=f1_score(original_result, preds, average='weighted')
+AccuracyN1C3RBF=log_regress.score(X = X_test ,y = y_test)
