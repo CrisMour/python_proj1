@@ -1,2 +1,2 @@
 # python_proj1
-classification_iris
+Iris dataset classification with 5 different models.
